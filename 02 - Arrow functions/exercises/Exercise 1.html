@@ -32,17 +32,26 @@
 <script>
 
   // Select all the list items on the page and convert to array
+  list = Array.from(document.querySelectorAll('li'))
 
   // Filter for only the elements that contain the word 'flexbox'
+  flexes = list.filter(li => li.textContent == "Flexbox Video")
 
   // map down to a list of time strings
+  times = flexes.map(flex => flex.dataset.time)
+  // console.table(times)
 
   // map to an array of seconds
+  secondsList = times.map(time => {
+    parts = time.split(':').map(part => parseFloat(part))
+    return parts[0] * 60 + parts[1]
+  })
 
   // reduce to get total
+  sum = secondsList.reduce((total, current) => total + current)
 
   // 🔥 This can also be done in a single .reduce(), but we're practicing arrow functions here, so chain them!
-
+  console.log(sum)
 </script>
 </body>
 </html>
